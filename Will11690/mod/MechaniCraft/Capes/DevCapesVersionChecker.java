@@ -4,11 +4,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import Will11690.mod.MechaniCraft.Common.DevCapes;
 import argo.jdom.JdomParser;
 
 public class DevCapesVersionChecker implements Runnable {
 
-	private static final String versionFileURL = "https://dl.dropboxusercontent.com/u/22865035/version.json";//"http://raw.github.com/Jadar/DeveloperCapesAPI/master/version";
+	private static final String versionFileURL = "http://raw.github.com/Jadar/DeveloperCapesAPI/master/version";
 
 	private byte result = 0;
 	
@@ -25,9 +26,9 @@ public class DevCapesVersionChecker implements Runnable {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 			double version = Double.valueOf(new JdomParser().parse(reader).getStringValue("version"));
 			
-			if(version > DevCapesUtil.version)
+			if(version > DevCapes.version)
 				result = OLD;
-			else if(version == DevCapesUtil.version)
+			else if(version == DevCapes.version)
 				result = CURRENT;
 			else
 				result = ERROR;

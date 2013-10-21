@@ -151,6 +151,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid="MechaniCraft",name="MechaniCraft",version="1.64D")
 
@@ -359,7 +360,7 @@ public static ServerProxy proxy;
 @EventHandler
 public void PreInit(FMLPreInitializationEvent PreEvent){
 	//Cape Stuff
-		DevCapesUtil.getInstance().addFileUrl("https://dl.dropboxusercontent.com/s/i82qjc6cvhwjidx/MechaniCraftCapes.txt?token_hash=AAGfxV3KsNJAmwvteHFw0mg5Sn1-yQpNB6A3FPWSu0LtSg&dl=1");
+	DevCapesUtil.addFileUrl("https://dl.dropboxusercontent.com/s/i82qjc6cvhwjidx/MechaniCraftCapes.txt?token_hash=AAGfxV3KsNJAmwvteHFw0mg5Sn1-yQpNB6A3FPWSu0LtSg&dl=1");
 	
 	Configuration Config = new Configuration(PreEvent.getSuggestedConfigurationFile());
 	

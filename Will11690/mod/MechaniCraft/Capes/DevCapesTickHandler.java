@@ -3,6 +3,7 @@ package Will11690.mod.MechaniCraft.Capes;
 import java.util.EnumSet;
 import java.util.List;
 
+import Will11690.mod.MechaniCraft.Common.DevCapes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -15,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class DevCapesTickHandler implements ITickHandler {
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
-	private static final DevCapesUtil instance = DevCapesUtil.getInstance();
+	private static final DevCapes instance = DevCapesUtil.getInstance();
 
 	// Keep at false when packaging..
 	private boolean debug = false;
