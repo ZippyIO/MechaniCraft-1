@@ -165,7 +165,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="MechaniCraft",name="MechaniCraft",version="1.64D")
+@Mod(modid="MechaniCraft",name="MechaniCraft",version="1.64E")
 
 @NetworkMod(clientSideRequired=true,serverSideRequired=false, channels = "MechaniCraft", packetHandler = MechaniCraftPacketHandler.class)
 
