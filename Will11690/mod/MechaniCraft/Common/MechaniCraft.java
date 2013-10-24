@@ -65,6 +65,12 @@ import Will11690.mod.MechaniCraft.Blocks.SapphireOre;
 import Will11690.mod.MechaniCraft.Blocks.TinBlock;
 import Will11690.mod.MechaniCraft.Blocks.TinOre;
 import Will11690.mod.MechaniCraft.Capes.DevCapesUtil;
+import Will11690.mod.MechaniCraft.Chests.CopperChest;
+import Will11690.mod.MechaniCraft.Chests.DiamondChest;
+import Will11690.mod.MechaniCraft.Chests.GoldChest;
+import Will11690.mod.MechaniCraft.Chests.IronChest;
+import Will11690.mod.MechaniCraft.Chests.ObsidianChest;
+import Will11690.mod.MechaniCraft.Chests.StoneChest;
 import Will11690.mod.MechaniCraft.Foods.CookedLambchop;
 import Will11690.mod.MechaniCraft.Foods.RawLambchop;
 import Will11690.mod.MechaniCraft.GUI.GuiHandler;
@@ -94,8 +100,14 @@ import Will11690.mod.MechaniCraft.MachineItems.FurnaceSmeltry;
 import Will11690.mod.MechaniCraft.MachineItems.MachineFramePart;
 import Will11690.mod.MechaniCraft.MachineItems.OreGrinderBlade;
 import Will11690.mod.MechaniCraft.OreGen.NewOreGen;
+import Will11690.mod.MechaniCraft.TileEntity.TileEntityCopperChest;
+import Will11690.mod.MechaniCraft.TileEntity.TileEntityDiamondChest;
+import Will11690.mod.MechaniCraft.TileEntity.TileEntityGoldChest;
+import Will11690.mod.MechaniCraft.TileEntity.TileEntityIronChest;
 import Will11690.mod.MechaniCraft.TileEntity.TileEntityIronFurnace;
+import Will11690.mod.MechaniCraft.TileEntity.TileEntityObsidianChest;
 import Will11690.mod.MechaniCraft.TileEntity.TileEntityOreGrinder;
+import Will11690.mod.MechaniCraft.TileEntity.TileEntityStoneChest;
 import Will11690.mod.MechaniCraft.Tools.BronzeAxe;
 import Will11690.mod.MechaniCraft.Tools.BronzeHoe;
 import Will11690.mod.MechaniCraft.Tools.BronzePickaxe;
@@ -316,6 +328,14 @@ public static ServerProxy proxy;
 	public static Block ChiseledQuartzBrick;
 	public static Block QuartzBrick;
 	
+	//Chests
+	public static Block StoneChest;
+	public static Block CopperChest;
+	public static Block IronChest;
+	public static Block GoldChest;
+	public static Block DiamondChest;
+	public static Block ObsidianChest;
+	
 	//Machines
 	public static Block IronFurnaceIdle;
 	public static Block IronFurnaceBurning;
@@ -526,6 +546,14 @@ public void PreInit(FMLPreInitializationEvent PreEvent){
 	
 	int MachineFrameID = Config.getBlock("MachineFrame", 3520).getInt();
 	
+	//Chests
+	int StoneChestID = Config.getBlock("StoneChest", 3521).getInt();
+	int CopperChestID = Config.getBlock("CopperChest", 3522).getInt();
+	int IronChestID = Config.getBlock("IronChest", 3523).getInt();
+	int GoldChestID = Config.getBlock("GoldChest", 3524).getInt();
+	int DiamondChestID = Config.getBlock("DiamondChest", 3525).getInt();
+	int ObsidianChestID = Config.getBlock("ObsidianChest", 3526).getInt();
+	
 	
 	
 	Config.save();
@@ -539,7 +567,7 @@ public void PreInit(FMLPreInitializationEvent PreEvent){
 	LanguageRegistry.instance().addStringLocalization("itemGroup.MechaniCraftBlocks", "en_US", "MechaniCraft Blocks");
 	LanguageRegistry.instance().addStringLocalization("itemGroup.MechaniCraftCombat", "en_US", "MechaniCraft Combat");
 	LanguageRegistry.instance().addStringLocalization("itemGroup.MechaniCraftTools", "en_US", "MechaniCraft Tools");
-	LanguageRegistry.instance().addStringLocalization("itemGroup.MechaniCraftMachines", "en_US", "MechaniCraft Machines");
+	LanguageRegistry.instance().addStringLocalization("itemGroup.MechaniCraftMachines", "en_US", "MechaniCraft Machines & Chests");
 	LanguageRegistry.instance().addStringLocalization("itemGroup.MechaniCraftMisc", "en_US", "MechaniCraft Misc");
 	
 	proxy.registerServerTickHandler();
@@ -698,6 +726,14 @@ public void PreInit(FMLPreInitializationEvent PreEvent){
 	OreGrinderBurning = new OreGrinder(OreGrinderBurningID, true).setHardness(3.5F).setUnlocalizedName("OreGrinderBurning");
 	
 	MachineFrame = new MachineFrame(MachineFrameID, 1).setHardness(3.5F).setUnlocalizedName("MachineFrame").setCreativeTab(this.MechaniCraftMachines);
+	
+	//Chests
+	StoneChest = new StoneChest(StoneChestID, 0).setUnlocalizedName("StoneChest").setCreativeTab(this.MechaniCraftMachines);
+	CopperChest = new CopperChest(CopperChestID, 0).setUnlocalizedName("CopperChest").setCreativeTab(this.MechaniCraftMachines);
+	IronChest = new IronChest(IronChestID, 0).setUnlocalizedName("IronChest").setCreativeTab(this.MechaniCraftMachines);
+	GoldChest = new GoldChest(GoldChestID, 0).setUnlocalizedName("GoldChest").setCreativeTab(this.MechaniCraftMachines);
+	DiamondChest = new DiamondChest(DiamondChestID, 0).setUnlocalizedName("DiamondChest").setCreativeTab(this.MechaniCraftMachines);
+	ObsidianChest = new ObsidianChest(ObsidianChestID, 0).setUnlocalizedName("ObsidianChest").setCreativeTab(this.MechaniCraftMachines);
 	
 	//Machine Items
 	OreGrinderBlade = new OreGrinderBlade(OreGrinderBladeID).setUnlocalizedName("OreGrinderBlade").setCreativeTab(this.MechaniCraftMachines);
@@ -888,6 +924,14 @@ public void PreInit(FMLPreInitializationEvent PreEvent){
 	
 	GameRegistry.registerBlock(MachineFrame, "MachineFrame");
 	
+	//Chests
+	GameRegistry.registerBlock(StoneChest, "StoneChest");
+	GameRegistry.registerBlock(CopperChest, "CopperChest");
+	GameRegistry.registerBlock(IronChest, "IronChest");
+	GameRegistry.registerBlock(GoldChest, "GoldChest");
+	GameRegistry.registerBlock(DiamondChest, "DiamondChest");
+	GameRegistry.registerBlock(ObsidianChest, "ObsidianChest");
+	
 //Language Registry
 	
 	//Items
@@ -1049,48 +1093,64 @@ public void PreInit(FMLPreInitializationEvent PreEvent){
 	
 	LanguageRegistry.addName(MachineFrame, "Machine Frame");
 	
+	//Chests
+	LanguageRegistry.addName(StoneChest, "Stone Chest");
+	LanguageRegistry.addName(CopperChest, "Copper Chest");
+	LanguageRegistry.addName(IronChest, "Iron Chest");
+	LanguageRegistry.addName(GoldChest, "Gold Chest");
+	LanguageRegistry.addName(DiamondChest, "Diamond Chest");
+	LanguageRegistry.addName(ObsidianChest, "Obsidian Chest");
+	
 	//Other
 	GameRegistry.registerTileEntity(TileEntityIronFurnace.class, "tileentityironfurnace");
 	GameRegistry.registerTileEntity(TileEntityOreGrinder.class, "tileentityoregrinder");
+	
+	GameRegistry.registerTileEntity(TileEntityStoneChest.class, "tileentitystonechest");
+	GameRegistry.registerTileEntity(TileEntityCopperChest.class, "tileentitycopperchest");
+	GameRegistry.registerTileEntity(TileEntityIronChest.class, "tileentityironchest");
+	GameRegistry.registerTileEntity(TileEntityGoldChest.class, "tileentitygoldchest");
+	GameRegistry.registerTileEntity(TileEntityDiamondChest.class, "tileentitydiamondchest");
+	GameRegistry.registerTileEntity(TileEntityObsidianChest.class, "tileentityobsidianchest");
+	
 	NetworkRegistry.instance().registerGuiHandler(this, guihandler);
 
 	//Ore Dictonary
 	
-		OreDictionary.registerOre("ingotCopper", new ItemStack(CopperIngot));
-		OreDictionary.registerOre("ingotBronze", new ItemStack(BronzeIngot));
-		OreDictionary.registerOre("ingotEnd", new ItemStack(EndIngot));
-		OreDictionary.registerOre("ingotTin", new ItemStack(TinIngot));
-		OreDictionary.registerOre("ingotGlass", new ItemStack(GlassIngot));
-		OreDictionary.registerOre("ingotObsidian", new ItemStack(ObsidianIngot));
-		OreDictionary.registerOre("gemRuby", new ItemStack(RubyGem));
-		OreDictionary.registerOre("gemEvil", new ItemStack(EvilCrystal));
-		OreDictionary.registerOre("gemPure", new ItemStack(PureCrystal));
-		OreDictionary.registerOre("gemSapphire", new ItemStack(SapphireGem));
+	OreDictionary.registerOre("ingotCopper", new ItemStack(CopperIngot));
+	OreDictionary.registerOre("ingotBronze", new ItemStack(BronzeIngot));
+	OreDictionary.registerOre("ingotEnd", new ItemStack(EndIngot));
+	OreDictionary.registerOre("ingotTin", new ItemStack(TinIngot));
+	OreDictionary.registerOre("ingotGlass", new ItemStack(GlassIngot));
+	OreDictionary.registerOre("ingotObsidian", new ItemStack(ObsidianIngot));
+	OreDictionary.registerOre("gemRuby", new ItemStack(RubyGem));
+	OreDictionary.registerOre("gemEvil", new ItemStack(EvilCrystal));
+	OreDictionary.registerOre("gemPure", new ItemStack(PureCrystal));
+	OreDictionary.registerOre("gemSapphire", new ItemStack(SapphireGem));
 		
-		OreDictionary.registerOre("oreCopper", new ItemStack(CopperOre));
-		OreDictionary.registerOre("oreTin", new ItemStack(TinOre));
-		OreDictionary.registerOre("oreRuby", new ItemStack(RubyOre));
-		OreDictionary.registerOre("oreSappire", new ItemStack(SapphireOre));
-		OreDictionary.registerOre("orePure", new ItemStack(PureOre));
-		OreDictionary.registerOre("oreEvil", new ItemStack(EvilOre));
+	OreDictionary.registerOre("oreCopper", new ItemStack(CopperOre));
+	OreDictionary.registerOre("oreTin", new ItemStack(TinOre));
+	OreDictionary.registerOre("oreRuby", new ItemStack(RubyOre));
+	OreDictionary.registerOre("oreSappire", new ItemStack(SapphireOre));
+	OreDictionary.registerOre("orePure", new ItemStack(PureOre));
+	OreDictionary.registerOre("oreEvil", new ItemStack(EvilOre));
 		
-		OreDictionary.registerOre("blockEvil", new ItemStack(EvilGemBlock));
-		OreDictionary.registerOre("blockCopper", new ItemStack(CopperBlock));
-		OreDictionary.registerOre("blockTin", new ItemStack(TinBlock));
-		OreDictionary.registerOre("blockBronze", new ItemStack(BronzeBlock));
-		OreDictionary.registerOre("blockPure", new ItemStack(PureGemBlock));
-		OreDictionary.registerOre("blockEnd", new ItemStack(EndBlock));
-		OreDictionary.registerOre("blockSapphire", new ItemStack(SapphireBlock));
-		OreDictionary.registerOre("blockRuby", new ItemStack(RubyBlock));
+	OreDictionary.registerOre("blockEvil", new ItemStack(EvilGemBlock));
+	OreDictionary.registerOre("blockCopper", new ItemStack(CopperBlock));
+	OreDictionary.registerOre("blockTin", new ItemStack(TinBlock));
+	OreDictionary.registerOre("blockBronze", new ItemStack(BronzeBlock));
+	OreDictionary.registerOre("blockPure", new ItemStack(PureGemBlock));
+	OreDictionary.registerOre("blockEnd", new ItemStack(EndBlock));
+	OreDictionary.registerOre("blockSapphire", new ItemStack(SapphireBlock));
+	OreDictionary.registerOre("blockRuby", new ItemStack(RubyBlock));
 		
-		OreDictionary.registerOre("dustCopper", new ItemStack(CopperDust));
-		OreDictionary.registerOre("dustTin", new ItemStack(TinDust));
-		OreDictionary.registerOre("dustIron", new ItemStack(IronDust));
-		OreDictionary.registerOre("dustGold", new ItemStack(GoldDust));
+	OreDictionary.registerOre("dustCopper", new ItemStack(CopperDust));
+	OreDictionary.registerOre("dustTin", new ItemStack(TinDust));
+	OreDictionary.registerOre("dustIron", new ItemStack(IronDust));
+	OreDictionary.registerOre("dustGold", new ItemStack(GoldDust));
 		
-		OreDictionary.registerOre("nuggetIron", new ItemStack(IronNugget));
-		OreDictionary.registerOre("nuggetCopper", new ItemStack(CopperNugget));
-		OreDictionary.registerOre("nuggetTin", new ItemStack(TinNugget));
+	OreDictionary.registerOre("nuggetIron", new ItemStack(IronNugget));
+	OreDictionary.registerOre("nuggetCopper", new ItemStack(CopperNugget));
+	OreDictionary.registerOre("nuggetTin", new ItemStack(TinNugget));
 		
 //Crafting
 		
@@ -1459,8 +1519,8 @@ public void PreInit(FMLPreInitializationEvent PreEvent){
 		GameRegistry.addSmelting(MechaniCraft.CopperDust.itemID, new ItemStack(MechaniCraft.CopperIngot), 0.2F);
 		GameRegistry.addSmelting(MechaniCraft.RawLambchop.itemID, new ItemStack(MechaniCraft.CookedLambchop), 0.5F);
 	
-proxy.entityDropEvents();
-proxy.registerRenderThings();
+	proxy.entityDropEvents();
+	proxy.registerRenderThings();
 }
 
 @EventHandler
