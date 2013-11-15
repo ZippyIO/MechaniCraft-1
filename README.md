@@ -4,19 +4,17 @@ Adds Machines, Tools, Armor, Blocks, Items, and Lambchops to minecraft!
 
 Planned Features:
 
-1.) Chests
+1.) Dimension
 
-2.) Dimension
+2.) Custom Biome for Dimension
 
-3.) Custom Biome for Dimension
+3.) Mobs
 
-4.) Mobs
+4.) Power Source for machines
 
-5.) Power Source for machines
-
-6.) More Machines
+5.) More Machines
 
 If you wish to contact me leave a reply on this webpage:
-http://www.minecraftforum.net/topic/1972686-mechanicraft-162d164dfor-mc-162164/
+http://www.minecraftforge.net/forum/index.php/topic,13923.msg71479.html#msg71479
 
 or email me at will_bashore@yahoo.com
